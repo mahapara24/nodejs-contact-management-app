@@ -1,0 +1,11 @@
+{
+  "name": "contact-management-backend",
+  "version": "1.0.0",
+  "description": "This is based on API's",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mahapara Nizamani",
+  "license": "ISC"
+}

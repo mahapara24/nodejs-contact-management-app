@@ -27,16 +27,35 @@ const getContact = asyncHandler(async (req, res) => {
   const contact = await Contact.findById(req.params.id);
   if (!contact) {
     res.status(404);
+    throw new Error("Contact not found");
   }
-  res.status(200).json({ message: `get a contact for ${req.params.id}` });
+  res.status(200).json(contact);
 });
 
 const updateContact = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: `Update a contact for ${req.params.id}` });
+  const contact = await Contact.findById(req.params.id);
+  if (!contact) {
+    res.status(404);
+    throw new Error("Contact not found");
+  }
+  const updatedContact = await Contact.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { new: true }
+  );
+
+  res.status(200).json(updatedContact);
 });
 
 const deleteContact = asyncHandler(async (req, res) => {
-  res.status(200).json({ message: `Delete a contact for ${req.params.id}` });
+  const contact = await Contact.findById(req.params.id);
+  if (!contact) {
+    res.status(404);
+    throw new Error("Contact not found");
+  }
+
+  await Contact.findByIdAndDelete(req.params.id); //in this video instructor showed remove method but that was not working so this findByIdAndDelete
+  res.status(200).json(contact);
 });
 
 module.exports = {
